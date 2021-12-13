@@ -46,7 +46,7 @@ if __name__ == "__main__":
     i = frameNo = 0
     # reading the initial chessboard image
     virtualChessboard = chessboard.getBoardImage()
-    isFirstFrame = True
+    # isFirstFrame = True
     while True:
         orgFrame = video[frameNo]
         if i < len(stableFrames) - 1:
@@ -65,6 +65,6 @@ if __name__ == "__main__":
         if not frameNo < frameCount:
             break
 
-        if isFirstFrame:
-            cv.waitKey(30000*2)
-            isFirstFrame = False
+        # if isFirstFrame:
+        #     cv.waitKey(30000*2)
+        #     isFirstFrame = False
