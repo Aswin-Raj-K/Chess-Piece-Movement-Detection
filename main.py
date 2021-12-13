@@ -31,6 +31,7 @@ while ret:
 cap.release()
 
 frameCount = len(video)
+# Finding the stable frames in the video for movement detection
 stableFrames = m.findStableFrames(video, refA, areaThreshold)
 print("=============================")
 print("Stable Frame No:", stableFrames)
