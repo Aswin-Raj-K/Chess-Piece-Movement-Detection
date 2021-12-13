@@ -20,7 +20,7 @@ class ChessBoard:
     __WHITE_ROOK = 5
     __WHITE_PAWN = 6
 
-    def __init__(self, boardCellSize=81, coinSizeRatio=0.8, boardColor=([74,139,184], [111,193,227]),
+    def __init__(self, boardCellSize=81, coinSizeRatio=0.8, boardColor=([74, 139, 184], [111, 193, 227]),
                  coinColor=([21, 21, 21], [195, 223, 228])):
         self.__coinSizeRatio = coinSizeRatio
         self.__coinColor = coinColor
@@ -33,8 +33,9 @@ class ChessBoard:
         # cv.imshow('frame', self.__boardImage.astype('uint8'))
         # cv.waitKey(0)
         # self.__boardImage.astype('uint8')
+
     def getBoardImage(self):
-        return  self.__boardImage.astype('uint8')
+        return self.__boardImage.astype('uint8')
 
     def __initializeBoard(self):
         self.__board = np.zeros((8, 8), dtype='int') * self.__EMPTY
@@ -67,6 +68,7 @@ class ChessBoard:
         # cv.imshow("ChessBoard", self.__boardImage)
         # cv.waitKey(0)
 
+    # Places pieces on the chess board as per the 2d array containing the information of the chess pieces
     def __placePieces(self):
         coinColor = self.__coinColor
         for i in range(8):
@@ -87,13 +89,16 @@ class ChessBoard:
                                     color = coinColor[1]
                                 self.__boardImage[x + n, y + m] = color
 
+    # Refresh the virtual chessboard
+    # Is called whenever we want to update the virtual chessboard
     def refresh(self):
         self.__createBoard()
         self.__placePieces()
         # cv.imshow('frame', self.__boardImage.astype('uint8'))
         # cv.waitKey(0)
-        return  self.__boardImage.astype('uint8')
+        return self.__boardImage.astype('uint8')
 
+    # Function for moving the pieces on the chess board
     def movePiece(self, start, end):
         self.__board[end] = self.__board[start]
         self.__board[start] = self.__EMPTY

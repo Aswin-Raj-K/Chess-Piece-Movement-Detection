@@ -14,7 +14,7 @@ def getBlob(img):
 
     return thresh
 
-
+# Get the intersection points when opposite sides is segmented into gridlines
 def getIntersections(cornerPoints, segments=16):
     segments = 16
     n = segments
@@ -39,7 +39,7 @@ def getIntersections(cornerPoints, segments=16):
                 j = j - 1
     return intersections, edgePoints
 
-
+# Finding contour with the maximum/minimum area above the threshold area
 def getContour(contours, thresh=0, smallest=False):
     bigC = 0
     if smallest:
@@ -56,12 +56,12 @@ def getContour(contours, thresh=0, smallest=False):
                 index = i
     return bigC, index
 
-
+# Finding the center of the contour
 def getCenter(contour):
     x, y, w, h = cv.boundingRect(contour)
     return [int(x + w / 2), int(y + h / 2)], x, y, w, h
 
-
+# Mapping the point to the nearest intersection points (grid points)
 def getNeighbour(point, intersections):
     temp = math.inf
     closestPoint = 0
@@ -78,13 +78,13 @@ def getNeighbour(point, intersections):
         i = i + 1
     return closestPoint, index
 
-
+# Approximate the contour into a quadrilateral
 def getCorners(contour):
     epsilon = 0.1 * cv.arcLength(contour, True)
     approx = cv.approxPolyDP(contour, epsilon, True)
     return approx
 
-
+# Returns the grid col and row index of the mapped point on the grid corresponding to the center of the contour in img
 def getPosition(img, intersections):
     contours, hierarchy = cv.findContours(img, 1, 2)
     c = getContour(contours, 0, False)[0]
@@ -100,7 +100,7 @@ def getPosition(img, intersections):
     col = index % 8
     return (row, col), nP, c
 
-
+# Function to find the stable frames in the video
 def findStableFrames(video, refA, areaThreshold, stabilityFrame=50, UT=3000, LT=1000):
     movementFrames = [0]
     stableFrames = 0
@@ -134,8 +134,8 @@ def findStableFrames(video, refA, areaThreshold, stabilityFrame=50, UT=3000, LT=
 
     return movementFrames
 
-
-def detectMovementAndUpdateBoard(img1, img2, intersections, chessboard):
+# Returns the final and orginal piece position as row and column index
+def getPiecePos(img1, img2, intersections):
     # img1 = video[stableFrames[frameNo]]
     # img2 = video[stableFrames[frameNo + 1]]
     # m.showImage(img1)
@@ -152,12 +152,17 @@ def detectMovementAndUpdateBoard(img1, img2, intersections, chessboard):
     img21_m = cv.medianBlur(img21, 15)
     # cv.imwrite("Results/img21.png", img21_m)
     # m.showImage(img21_m)
-    orgPos, nP, c = getPosition(img12_m, intersections)
-    finalPos, nP, c = getPosition(img21_m, intersections)
+    orgPos, nP1, orgC = getPosition(img12_m, intersections)
+    finalPos, nP2, finalC = getPosition(img21_m, intersections)
     # m.showGraph(img1, intersections, edgePoints, c, nP)
 
+    return orgPos, finalPos, orgC, finalC
+
+
+def detectMovementAndUpdateBoard(img1, img2, intersections, chessboard):
     # print(orgPos)
     # print(finalPos)
+    orgPos, finalPos, _, _ = getPiecePos(img1, img2, intersections)
     chessboard.movePiece(orgPos, finalPos)
     return chessboard.refresh()
 
