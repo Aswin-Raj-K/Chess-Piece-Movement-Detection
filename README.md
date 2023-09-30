@@ -1,25 +1,7 @@
-# Chess Piece Movement Detection
- 
-![Not Available](Results/Final_Result.gif)
 
-![Not Available](Results/Hand_Detection_OverChessBoard.gif)
-
-
-# EE5005 : Digital Image Processing
-## Electrical Engineering
-## IIT Palakkad
-## December 13, 2021
-### End Sem Project
 #### Real-time Tracking and Detection of Chess Piece Movement
 
-- **Aswin Raj K** (121801008@smail.iitpkd.ac.in)
-- **Jeffin Shibu** (121801055@smail.iitpkd.ac.in)
-
----
-
-### End Sem Project: Real-time Tracking and Detection of Chess Piece Movement
-
-We have developed a chess piece movement detection model which will track and detect chess piece movements and display them on a virtual chess board. Our aim was to develop a real-time model, but we couldn't complete it within the given time frame. We have recorded a part of a chess match, and the movements we made on the chessboard are tracked and displayed on the virtual chessboard.
+Developed a chess piece movement detection model which will track and detect chess piece movements and display them on a virtual chess board. Our aim was to develop a real-time model, but we couldn't complete it within the given time frame. We have recorded a part of a chess match, and the movements we made on the chessboard are tracked and displayed on the virtual chessboard.
 
 **Part A: Detection of Boundary of the Chess Board**
 
@@ -51,13 +33,4 @@ Each chess piece is mapped to a unique number, which is positive for white piece
 
 ### Conclusion
 
-Thus, we have developed a chess piece movement detection model (in Python) that tracks and displays the movements made on the real chessboard on the virtual board. Detailed explanations of the working and results of the algorithm can be found in the [Resources](#resources) section.
-
-### Resources
-
-- [Google Drive](link)
-- [GitHub Repository](link)
-
----
-
-*Note: Replace "link" with the actual links to your resources.*
+Thus, we have developed a chess piece movement detection model (in Python) that tracks and displays the movements made on the real chessboard on the virtual board. Detailed explanations of the working and results of the algorithm can be found in the report.
